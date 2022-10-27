@@ -45,6 +45,10 @@
             </div>
             
       </form>
+      <?php if(isset($_GET['update'])){
+            echo "<script> alert('Password Reset Successful')</script>";
+            }
+      ?>
    
     
 </div>

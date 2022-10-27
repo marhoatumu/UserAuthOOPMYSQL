@@ -3,7 +3,7 @@ include_once 'Dbh.php';
 session_start();
 
 class UserAuth extends Dbh{
-    private static $db;
+    //private static $db;
 
     public function __construct(){
         $this->db = new Dbh();
@@ -29,7 +29,7 @@ class UserAuth extends Dbh{
         $result = $conn->query($sql);
         if($result->num_rows > 0){
             $_SESSION['email'] = $email;
-            header("Location: ../dashboard.php");
+            header("Location: .\dashboard.php");
         } else {
             header("Location: forms/login.php");
         }
@@ -45,7 +45,7 @@ class UserAuth extends Dbh{
             return false;
         }
     }
-
+ 
     public function getAllUsers(){
         $conn = $this->db->connect();
         $sql = "SELECT * FROM Students";
@@ -93,9 +93,9 @@ class UserAuth extends Dbh{
 
     public function updateUser($username, $password){
         $conn = $this->db->connect();
-        $sql = "UPDATE users SET password = '$password' WHERE username = '$username'";
+        $sql = "UPDATE Students SET password = '$password' WHERE email = '$username'";
         if($conn->query($sql) === TRUE){
-            header("Location: ../dashboard.php?update=success");
+            header("Location: forms/resetpassword.php?update=success");
         } else {
             header("Location: forms/resetpassword.php?error=1");
         }
